@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Quieres ser mi San Valentín?</title>
+  <style>
+    /* Fondo rosado pastel */
+    body {
+      background-color: #ffd1dc;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Contenedor centrado */
+    .container {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      position: relative;
+    }
+
+    .buttons {
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    /* Botón "Sí" */
+    .yes-button {
+      border: 2px solid green;
+      background-color: #66cc66;
+      color: white;
+      padding: 15px 25px;
+      font-size: 1.2em;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    /* Botón "No" */
+    .no-button {
+      border: 2px solid red;
+      background-color: #ff6666;
+      color: white;
+      padding: 15px 25px;
+      font-size: 1.2em;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* Cambio de color al pasar el mouse */
+    .yes-button:hover {
+      background-color: #55aa55;
+    }
+
+    .no-button:hover {
+      background-color: #dd4444;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>¿Quieres ser mi San Valentín?</h1>
+    <div class="buttons">
+      <button class="yes-button" id="yesButton" onclick="handleYesClick()">Sí</button>
+      <button class="no-button" id="noButton" onclick="handleNoClick()">No</button>
+    </div>
+    <div class="gif_container">
+      <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW5lenZyZHI5OXM2eW95b3pmMG40cWVrMDhtNjVuM3A4dGNxa2g2dSZlcD12MV9pbnRlcm5naWZfYnlfaWQmY3Q9cw/VM1fcpu2bKs1e2Kdbj/giphy.gif" alt="Cute GIF">
+    </div>
+  </div>
+
+  <script>
+    let yesScale = 1; // Tamaño inicial del botón "Sí"
+    let noScale = 1;  // Tamaño inicial del botón "No"
+    let noClickCount = 0; // Contador de clics en "No"
+    const noMessages = [
+      "¿Segura?", 
+      "Piénsalo bien...", 
+      "¿Realmente segura?", 
+      "No te vas a arrepentir después, ¿verdad?", 
+      "¡Última oportunidad!", 
+      "Voy a llorar... 😢", 
+      "Por favor, di que sí... 🥺", 
+      "Mira qué bonito el botón 'Sí' 🤭", 
+      "Ok, pero duele... 💔"
+    ]; // Mensajes secuenciales
+
+    function handleYesClick() {
+      // Redirige a la nueva página
+      window.location.href = "2.html"; // Aquí va la URL de la página de redirección
+    }
+
+    function handleNoClick() {
+      const yesButton = document.getElementById('yesButton');
+      const noButton = document.getElementById('noButton');
+
+      // Aumenta el tamaño del botón "Sí" un 35%
+      yesScale *= 1.35;
+      yesButton.style.transform = `scale(${yesScale})`;
+
+      // Reduce el tamaño del botón "No" un 20% por cada clic
+      noScale *= 0.8;
+      noButton.style.transform = `scale(${noScale})`;
+
+      // Cambia el texto del botón "No" progresivamente
+      if (noClickCount < noMessages.length) {
+        noButton.textContent = noMessages[noClickCount];
+      }
+
+      // Después del último mensaje, el botón "No" desaparece sutilmente
+      if (noClickCount === noMessages.length) {
+        noButton.style.opacity = "0";
+        setTimeout(() => noButton.style.display = "none", 300); // Lo oculta después de la animación
+      }
+
+      noClickCount++;
+    }
+  </script>
+</body>
+</html>
